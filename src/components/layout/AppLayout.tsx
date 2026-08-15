@@ -4,6 +4,7 @@ import SideNavigation from '@cloudscape-design/components/side-navigation';
 import TopNavigation from '@cloudscape-design/components/top-navigation';
 import { TierSwitcher } from '@/components/shared/TierSwitcher';
 import { PromotionBanner } from '@/components/shared/PromotionBanner';
+import { AiAssistant } from '@/components/shared/AiAssistant';
 
 export function AppLayout() {
   const navigate = useNavigate();
@@ -51,6 +52,7 @@ export function AppLayout() {
           <>
             <TierSwitcher />
             <Outlet />
+            <AiAssistant />
           </>
         }
         toolsHide={true}
