@@ -2,6 +2,7 @@ import SegmentedControl from '@cloudscape-design/components/segmented-control';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import Link from '@cloudscape-design/components/link';
 import Box from '@cloudscape-design/components/box';
+import Button from '@cloudscape-design/components/button';
 import { useProficiency } from '@/hooks/useProficiency';
 import type { ProficiencyTier } from '@/types/proficiency';
 
@@ -22,7 +23,7 @@ const TIER_DESCRIPTIONS: Record<ProficiencyTier, string> = {
  * Includes a "Why this view?" link.
  */
 export function TierSwitcher() {
-  const { tier, setTier } = useProficiency();
+  const { tier, setTier, resetOnboarding } = useProficiency();
 
   return (
     <Box margin={{ bottom: 's' }}>
@@ -41,7 +42,6 @@ export function TierSwitcher() {
           variant="info"
           onFollow={(e) => {
             e.preventDefault();
-            // Could open a modal; for now just an accessible tooltip-like pattern
             alert(
               `You are in ${TIER_LABELS[tier]} view.\n\n${TIER_DESCRIPTIONS[tier]}\n\nYou can switch anytime. No features are removed, only the level of detail shown by default.`
             );
@@ -49,6 +49,13 @@ export function TierSwitcher() {
         >
           Why this view?
         </Link>
+        <Button
+          variant="link"
+          onClick={resetOnboarding}
+          ariaLabel="Reset onboarding and choose your experience level again"
+        >
+          Reset onboarding
+        </Button>
       </SpaceBetween>
     </Box>
   );
