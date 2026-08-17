@@ -76,6 +76,82 @@ Three distinct render modes of the same screens. Not tooltip toggles or simplifi
 
 ---
 
+## Success Metrics
+
+The redesign is measured by outcomes, not features shipped. Each metric ties back to a research finding.
+
+### Primary metrics
+
+| Metric | Current baseline (est.) | Target | Ties to |
+|--------|------------------------|--------|---------|
+| Time to first model selection (Explorer) | ~8 min (requires reading external docs) | Under 90 sec via template or wizard | Journey #1, Flexibility heuristic (sev 4) |
+| Task completion rate without leaving console | ~40% (users leave to search AWS docs) | 85%+ | Help & documentation heuristic (sev 3) |
+| Error self-resolution rate | ~30% (raw errors, no guidance) | 70%+ | Journey #2, Visibility heuristic (sev 3) |
+| Onboarding completion | No onboarding exists | 90%+ complete all 3 questions | Match to real world heuristic (sev 4) |
+
+### Secondary / health metrics
+
+| Metric | Target | Why it matters |
+|--------|--------|----------------|
+| Promotion acceptance rate | 25%+ of suggestions accepted | Validates that behavioral signals correctly detect growing proficiency |
+| Manual tier downgrades | Under 5% | High downgrades would signal we over-promoted or mismatched tiers |
+| Assistant deflection rate | 60%+ of questions answered without escalation | Confirms the assistant reduces documentation dependency |
+| "Show me the code" toggle rate (Explorer) | Tracked as leading indicator | Rising usage predicts readiness for Builder tier |
+
+### Guardrail metrics (don't regress these)
+
+- Practitioner task speed must not slow down. Adaptive features are opt-in for experts; the full-density view stays as fast as today's console.
+- No increase in support tickets from any tier.
+
+---
+
+## Iteration Narrative
+
+The design did not arrive fully formed. Key pivots:
+
+**v0: Self-rating slider (rejected).**
+The first instinct was a simple "Beginner / Intermediate / Expert" slider at onboarding. During a cognitive walkthrough this failed for two reasons: users are poor judges of their own skill (Dunning-Kruger cuts both ways, with experts underrating and novices overrating), and a self-label creates a fixed identity rather than a fluid one. A user who calls themselves "beginner" may resent being treated as one after they've learned.
+
+**v1: Behavioral questions (adopted).**
+Replaced the slider with three behavioral questions ("Have you called an API before?") that infer proficiency from concrete past actions rather than self-perception. This proved more reliable in walkthrough and avoids the identity trap.
+
+**v2: Silent auto-adaptation (rejected).**
+An early version silently upgraded and downgraded the interface based on signals. Walkthrough revealed this is disorienting and can feel condescending. If the UI simplifies itself uninvited, users feel demoted.
+
+**v3: Suggested, dismissible promotion + never auto-demote (adopted).**
+Promotion became an explicit, dismissible banner. Auto-demotion was removed entirely. The tier switcher stays visible in the header at all times with a "Why this view?" link so users always understand and control their experience.
+
+**v4: Simplified tiers as separate products (rejected).**
+Considered building Explorer as a genuinely stripped-down product. Rejected because it violates the core principle: no capability removed. Instead, every hidden thing is reachable in one click via expandable sections and toggles.
+
+The through-line: each iteration moved from imposing structure onto users toward giving them control while offering opinionated defaults.
+
+---
+
+## What I'd Validate Next
+
+This prototype is v1. The roadmap beyond it:
+
+### Validation plan
+- **Moderated usability tests** with 5 users per tier (15 total), measuring the primary metrics above. Explorer recruits from non-technical roles (PM, ops, analyst); Practitioner from senior engineers.
+- **Cognitive walkthrough** of the model testing flow (Journey #3) once the request/response interface is built out, since that is the highest-frustration path in the research.
+- **A/B test** the promotion trigger thresholds. The current thresholds (5 code panel opens, 3 unassisted completions) are hypotheses, not validated numbers.
+
+### Known gaps and future work
+- **Model testing / playground surface** (Journey #3) is scoped in research but not fully built. The evaluation engine recommends a model; the next step is a tiered request/response playground with sensible defaults for Explorers and full parameter control for Practitioners.
+- **Streaming responses.** When bedrock-mantle adds streaming, the loading and response states need rethinking at each tier (Explorers need a "still working" reassurance; Practitioners want token-by-token output).
+- **Multi-modal inputs.** Image and document inputs will need tier-appropriate upload and preview patterns.
+- **Cross-session learning.** Signals currently persist in localStorage. A production version would tie proficiency to the user's account so it follows them across devices.
+- **Real recommendation model.** The evaluation engine uses static benchmark scores. A production version would incorporate the user's actual usage history and live pricing.
+
+### Stakeholder alignment (how this would ship)
+- **Bedrock PM:** align on tier definitions and which capabilities are in scope per surface.
+- **Bedrock engineering:** confirm the bedrock-mantle client contract and env-flag rollout strategy.
+- **Customer support / SA teams:** validate Explorer templates against the real business tasks they hear from customers, and confirm the assistant's FAQ coverage matches actual ticket themes.
+- **Accessibility team:** review the progressive disclosure and wizard focus-management patterns against WCAG 2.1 AA before launch.
+
+---
+
 ## Proficiency Tiers
 
 ### Explorer
