@@ -12,7 +12,9 @@ export function AppLayout() {
 
   const navItems = [
     { type: 'link' as const, text: 'Model catalog', href: '/model-catalog' },
+    { type: 'link' as const, text: 'Playground', href: '/playground' },
     { type: 'link' as const, text: 'Projects', href: '/projects' },
+    { type: 'link' as const, text: 'Usage insights', href: '/usage' },
     { type: 'link' as const, text: 'Code samples', href: '/code-samples' },
     { type: 'link' as const, text: 'Errors', href: '/errors' },
     { type: 'link' as const, text: 'Quotas and pricing', href: '/quotas-pricing' },

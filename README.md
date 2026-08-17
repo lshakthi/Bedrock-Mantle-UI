@@ -228,7 +228,9 @@ Directly addresses the heuristic finding that users must leave the console to se
 | Surface | Journey Map Addressed | Core Problem Solved |
 |---------|----------------------|---------------------|
 | Model catalog | #1 (where to start), #3 (test a model) | Opinionated templates eliminate the "which model?" paralysis; evaluation wizard removes need to understand specs |
+| Playground | #3 (test a model) | Template-first prompt testing for Explorers, full parameter control for Practitioners, compare mode for iteration |
 | Projects | #2 (understand my project) | Health status + interpreted metrics + "what to do next" replaces raw numbers without context |
+| Usage insights | #2 (understand my project) | Time-series charts for request volume, cost, latency, errors. Model and region breakdowns. Trends interpreted at every tier. |
 | Code samples | #3 (test a model) | Per-line annotations at lower tiers; "Show me the code" toggle for Explorers who aren't ready |
 | Errors | #2 (understand my project) | Cause + one concrete next step replaces raw AWS error strings |
 | Quotas/pricing | #1 (where to start), #3 (test a model) | Cost calculator answers "can I afford N items?" without token math |
@@ -253,7 +255,9 @@ src/
 ├── pages/
 │   ├── OnboardingPage.tsx     # Behavioral questions → tier assignment
 │   ├── ModelCatalogPage.tsx   # Templates, evaluation, full catalog
+│   ├── PlaygroundPage.tsx     # Prompt testing, optimization, model comparison
 │   ├── ProjectViewPage.tsx    # Health monitoring and metrics
+│   ├── UsageDashboardPage.tsx # Time-series charts, inference analytics
 │   ├── CodeSamplesPage.tsx    # API examples with annotations
 │   ├── ErrorsPage.tsx         # Error interpretation
 │   └── QuotasPricingPage.tsx  # Cost calculator and quota visibility
@@ -261,6 +265,8 @@ src/
 │   ├── models.ts              # 5 model specs with explorer-friendly fields
 │   ├── templates.ts           # 6 pre-configured business task templates
 │   ├── evaluation.ts          # Benchmark data + recommendation engine
+│   ├── playground.ts          # Prompt templates + simulated model responses
+│   ├── dashboard.ts           # Time-series mock data for usage analytics
 │   ├── projects.ts            # 3 projects with health interpretation
 │   ├── codeSamples.ts         # 3 API format examples with annotations
 │   ├── errors.ts              # 5 error types with tiered explanations

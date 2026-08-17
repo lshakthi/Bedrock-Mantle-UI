@@ -7,6 +7,8 @@ import { ProjectViewPage } from '@/pages/ProjectViewPage';
 import { CodeSamplesPage } from '@/pages/CodeSamplesPage';
 import { ErrorsPage } from '@/pages/ErrorsPage';
 import { QuotasPricingPage } from '@/pages/QuotasPricingPage';
+import { PlaygroundPage } from '@/pages/PlaygroundPage';
+import { UsageDashboardPage } from '@/pages/UsageDashboardPage';
 
 export function App() {
   const proficiency = useProficiencyProvider();
@@ -23,7 +25,9 @@ export function App() {
             <Route element={<AppLayout />}>
               <Route index element={<Navigate to="/model-catalog" replace />} />
               <Route path="/model-catalog" element={<ModelCatalogPage />} />
+              <Route path="/playground" element={<PlaygroundPage />} />
               <Route path="/projects" element={<ProjectViewPage />} />
+              <Route path="/usage" element={<UsageDashboardPage />} />
               <Route path="/code-samples" element={<CodeSamplesPage />} />
               <Route path="/errors" element={<ErrorsPage />} />
               <Route path="/quotas-pricing" element={<QuotasPricingPage />} />
