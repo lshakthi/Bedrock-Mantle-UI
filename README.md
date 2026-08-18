@@ -1,5 +1,7 @@
 # Bedrock Mantle UI: Adaptive Console Redesign
 
+**Live demo:** https://bedrock-mantle-ui.vercel.app/model-catalog
+
 ## Overview
 
 This is a redesign of the Amazon Bedrock Mantle console. The existing UI is optimized for the bedrock-mantle endpoint (supporting OpenAI Responses API, OpenAI Chat Completions API, and Anthropic Messages API) and works well for engineers, but poorly for everyone else.
@@ -331,7 +333,7 @@ npm install
 npm run dev
 ```
 
-Opens at http://localhost:5173/. No AWS credentials needed. All data is mocked.
+Runs locally with no AWS credentials needed. All data is mocked. A hosted version is available at https://bedrock-mantle-ui.vercel.app/model-catalog.
 
 ### Production Build
 ```bash
