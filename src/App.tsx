@@ -10,12 +10,16 @@ import { QuotasPricingPage } from '@/pages/QuotasPricingPage';
 import { PlaygroundPage } from '@/pages/PlaygroundPage';
 import { UsageDashboardPage } from '@/pages/UsageDashboardPage';
 
+// Vite injects import.meta.env.BASE_URL from the `base` config.
+// On GitHub Pages this is "/Bedrock-Mantle-UI/", elsewhere "/".
+const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 export function App() {
   const proficiency = useProficiencyProvider();
 
   return (
     <ProficiencyCtx.Provider value={proficiency}>
-      <BrowserRouter>
+      <BrowserRouter basename={routerBasename}>
         {!proficiency.state.onboardingComplete ? (
           <Routes>
             <Route path="*" element={<OnboardingPage />} />
